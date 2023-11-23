@@ -31,7 +31,7 @@ function NavBar() {
                     <Sparkles className="w-4 h-4 fill-white ml-2" />
                 </Button>
                 <ModeToggle />
-                <UserButton />
+                <UserButton afterSignOutUrl="/" />
             </div>
         </div>
     )
