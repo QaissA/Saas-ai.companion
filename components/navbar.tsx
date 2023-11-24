@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "./theme-toggle";
 import MobileSidebar from "./mobileSidebar";
+import { useProModel } from "@/hooks/use-pro-model";
 
 
 const font = Poppins({
@@ -16,6 +17,7 @@ const font = Poppins({
 });
 
 function NavBar() {
+    const proModel = useProModel();
     return (
         <div className="fixed w-full z-50 flex justify-between items-center py-3 px-4 border-b border-primary/10 bg-secondary">
             <div className="flex items-center">
@@ -26,7 +28,7 @@ function NavBar() {
                 </Link>
             </div>
             <div className="flex items-center gap-x-3">
-                <Button variant="premuim" size="sm">
+                <Button onClick={proModel.onOpen} variant="premuim" size="sm">
                     Upgragde
                     <Sparkles className="w-4 h-4 fill-white ml-2" />
                 </Button>
