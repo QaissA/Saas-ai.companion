@@ -17,3 +17,12 @@ for this app we used the following build :
 + replicate
 + stripe
 + zustand
+
+
+
+------------
+while working with the app there is certain consigne to considere for at most results : 
+
+for  stripe since its just for show and its in test mode :
+  for credit card use the following card : 4242 4242 4242 4242 (as its result in succes transaction)
+  for other information you can use dummy information.
