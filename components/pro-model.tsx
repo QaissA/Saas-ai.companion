@@ -5,7 +5,7 @@ import { useProModel } from "@/hooks/use-pro-model"
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 
@@ -14,6 +14,11 @@ function ProModel() {
     const { toast } = useToast();
 
     const [loading, setLoading] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, [])
 
     const onSubscribe = async () => {
         try {
@@ -29,6 +34,10 @@ function ProModel() {
         } finally {
             setLoading(false)
         }
+    }
+
+    if (!isMounted) {
+        return null;
     }
 
     return (

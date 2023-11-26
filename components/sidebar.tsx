@@ -1,12 +1,18 @@
 "use client";
 
+import { useProModel } from "@/hooks/use-pro-model";
 import { cn } from "@/lib/utils";
 import { Home, Plus, Settings } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
-function Sidebar() {
-    const pathName = usePathname();
-    const router = useRouter();
+interface SidebarProps {
+  isPro: boolean
+}
+
+function Sidebar({ isPro }: SidebarProps) {
+  const pathName = usePathname();
+  const router = useRouter();
+  const proModel = useProModel();
 
   const routes = [
     {
@@ -29,9 +35,11 @@ function Sidebar() {
     },
   ];
 
-  function onNavigate(url : string, pro : boolean) {
+  function onNavigate(url: string, pro: boolean) {
     //TODO : check if pro
-
+    if (pro && !isPro) {
+      return proModel.onOpen();
+    }
     return router.push(url);
   }
 
@@ -41,17 +49,17 @@ function Sidebar() {
         <div className="space-y-2">
           {routes.map((route) => (
             <div
-                onClick={() => onNavigate(route.href, route.pro)}
+              onClick={() => onNavigate(route.href, route.pro)}
               key={route.href}
               className={cn(
                 "text-muted-foreground text-xs group flex p-3 w-full justify-start font-meduim cursor-pointer hove:text-primary hover:bg-primary/10 rounded-lg transition",
                 pathName === route.href && "bg-primary/10 text-primary"
               )}
             >
-                <div className="flex flex-col gap-y-2 items-center flex-1">
-                    <route.icon className="h-5 w-5 " />
-                    {route.label}
-                </div>
+              <div className="flex flex-col gap-y-2 items-center flex-1">
+                <route.icon className="h-5 w-5 " />
+                {route.label}
+              </div>
             </div>
           ))}
         </div>
